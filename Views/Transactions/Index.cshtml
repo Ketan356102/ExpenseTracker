@@ -1,0 +1,37 @@
+@model IEnumerable<ExpenseTracker.Models.Transaction>
+
+@{
+    ViewData["Title"] = "Transactions";
+}
+
+<h2>All Transactions</h2>
+<a asp-action="Create" class="btn btn-primary mb-3">Add Transaction</a>
+<a asp-action="Summary" class="btn btn-success mb-3">View Summary</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Type</th>
+            <th>Category</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Note</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+    <tr>
+        <td>@item.Type</td>
+        <td>@item.Category</td>
+        <td>@item.Amount</td>
+        <td>@item.Date.ToString("dd-MM-yyyy")</td>
+        <td>@item.Note</td>
+        <td>
+            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
+            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+        </td>
+    </tr>
+}
+    </tbody>
+</table>
